@@ -15,9 +15,9 @@ public enum Jenis_Kelamin
    public String toString(){
         switch(this){
             case MALE:
-                return "Male";
+                return "Laki - Laki";
             case FAMELE:
-                return "Famele";
+                return "Perempuan";
  
    
 }

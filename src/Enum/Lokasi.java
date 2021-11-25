@@ -16,11 +16,11 @@ public enum Lokasi {
     public String toString() {
         switch (this) {
             case GD4:
-                return "GD4";
+                return "Gedung 4";
             case GD5:
-                return "GD5";
+                return "Gedung 5";
             case GD7:
-                return "GD";
+                return "Gedung 7";
         }
 
         return null;
