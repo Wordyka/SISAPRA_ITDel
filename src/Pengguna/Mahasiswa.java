@@ -7,20 +7,16 @@ public class Mahasiswa extends Pengguna{
 
     // constructor
 
-    public Mahasiswa(String NIM, String prodi, String angkatan) {
+
+
+    public Mahasiswa(String namaDepan, String namaBelakang, String jk, String NIM, String prodi, String angkatan) {
+        super();
         this.NIM = NIM;
         this.Prodi = prodi;
         this.Angkatan = angkatan;
     }
 
-    public Mahasiswa(String NIM, String prodi) {
-        this.NIM = NIM;
-        this.Prodi = prodi;
-    }
 
-    public Mahasiswa(String NIM) {
-        this.NIM = NIM;
-    }
 
     public Mahasiswa() {
     }

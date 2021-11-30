@@ -3,11 +3,18 @@ package Pengguna;
 public class Pengguna {
     private String namaDepan;
     private String namaBelakang;
-    private char jk;
+    private String jk;
 
     // constructor
 
+    public Pengguna(String namaDepan, String namaBelakang, String jk) {
+        this.namaDepan = namaDepan;
+        this.namaBelakang = namaBelakang;
+        this.jk = jk;
+    }
+
     public Pengguna() {
+
     }
 
 
@@ -21,7 +28,7 @@ public class Pengguna {
         this.namaBelakang = namaBelakang;
     }
 
-    public void setJk(char jk) {
+    public void setJk(String jk) {
         this.jk = jk;
     }
 
@@ -35,10 +42,9 @@ public class Pengguna {
         return namaBelakang;
     }
 
-    public char getJk() {
+    public String getJk() {
         return jk;
     }
-
 
     public void Info() {
         System.out.println("Info Pengguna");
