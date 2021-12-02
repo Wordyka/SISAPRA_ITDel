@@ -1,6 +1,8 @@
 package Pengguna;
 
-public class Pengguna {
+import java.io.Serializable;
+
+public class Pengguna implements Serializable {
     private String namaDepan;
     private String namaBelakang;
     private String jk;
@@ -14,9 +16,7 @@ public class Pengguna {
     }
 
     public Pengguna() {
-
     }
-
 
     // setter
 
@@ -46,7 +46,12 @@ public class Pengguna {
         return jk;
     }
 
-    public void Info() {
-        System.out.println("Info Pengguna");
+    @Override
+    public String toString() {
+        return "Pengguna{" +
+                "namaDepan='" + namaDepan + '\'' +
+                ", namaBelakang='" + namaBelakang + '\'' +
+                ", jk='" + jk + '\'' +
+                '}';
     }
 }

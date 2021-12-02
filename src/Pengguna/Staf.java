@@ -5,13 +5,16 @@ public class Staf extends Pengguna {
     private String Departemen;
 
     public Staf() {
+        super(null,null,null);
     }
 
     public Staf(String ID_Staf) {
+        super(null,null,null);
         this.ID_Staf = ID_Staf;
     }
 
     public Staf(String ID_Staf, String departemen) {
+        super(null,null,null);
         this.ID_Staf = ID_Staf;
         Departemen = departemen;
     }
