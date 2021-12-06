@@ -2,10 +2,10 @@ package SISAPRA;
 
 import java.io.Serializable;
 
-public class Pengguna  implements Serializable {
-    private String namaDepan;
-    private String namaBelakang;
-    private String jk;
+public class Pengguna implements Serializable {
+    private String namaDepan = "-";
+    private String namaBelakang = "-";
+    private String jk = "-";
 
     // constructor
 
@@ -16,6 +16,7 @@ public class Pengguna  implements Serializable {
     }
 
     public Pengguna() {
+
     }
 
     // setter
@@ -48,10 +49,6 @@ public class Pengguna  implements Serializable {
 
     @Override
     public String toString() {
-        return "Pengguna{" +
-                "namaDepan='" + namaDepan + '\'' +
-                ", namaBelakang='" + namaBelakang + '\'' +
-                ", jk='" + jk + '\'' +
-                '}';
+        return  namaDepan + " || " + namaBelakang + " || " + jk + " || ";
     }
 }

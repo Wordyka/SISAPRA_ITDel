@@ -13,33 +13,35 @@ import java.util.*;
 
 import java.io.*;
 
-class Barang implements Serializable{
+class Barang implements ITFPinjamKembali, Serializable{
     int ID_Barang = 0;
     String Nama = "-";
     String Jenis = "-";
     int Jumlah = 0;
     String Kondisi = "Baru";
+    String Loc;
     String Status = "Tersedia";
 
     public Barang() {
     }
 
-    public Barang(int ID_Barang, String Nama, String Jenis, int Jumlah, String Kondisi, String Status) {
+    public Barang(int ID_Barang, String Nama, String Jenis, int Jumlah, String Kondisi, String Loc, String Status) {
         this.ID_Barang = ID_Barang;
         this.Nama = Nama;
         this.Jenis = Jenis;
         this.Jumlah = Jumlah;
         this.Kondisi = Kondisi;
+        this.Loc = Loc;
         this.Status = Status;
     }
 
     @Override
     public String toString(){
-        return ID_Barang+" || "+Nama+" || "+Jenis+" || "+Jumlah+" || "+Kondisi+" || "+Status;
+        return ID_Barang+" || "+Nama+" || "+Jenis+" || "+Jumlah+" || "+Kondisi+" || "+Loc+" || "+Status;
     }
 
 
-    public void lihatBarang() throws IOException, ClassNotFoundException {
+    public void lihatBarang() throws IOException, ClassNotFoundException, InterruptedException {
         int choice = -1;
         Scanner s = new Scanner(System.in);
         Scanner s1 = new Scanner(System.in);
@@ -48,6 +50,7 @@ class Barang implements Serializable{
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
         ListIterator li = null;
+        AksiMahasiswa AMhs = new AksiMahasiswa();
         if(file2.isFile()){
             ois = new ObjectInputStream(new FileInputStream(file2));
             al2 = (ArrayList<Barang>)ois.readObject();
@@ -77,7 +80,7 @@ class Barang implements Serializable{
                         System.out.println("-------------------------------------");
                         li = al2.listIterator();
                         System.out.println("============DAFTAR BARANG=============");
-                        System.out.println("ID || Nama || Jenis || Jumlah || Kondisi");
+                        System.out.println("ID || Nama || Jenis || Jumlah || Kondisi || Lokasi || Status");
                         while(li.hasNext())
                             System.out.println(li.next());
                         System.out.println("-------------------------------------");
@@ -153,89 +156,23 @@ class Barang implements Serializable{
                     }
                     break;
                 case 5:
-                    if(file2.isFile()){
-                        ois = new ObjectInputStream(new FileInputStream(file2));
-                        al2 = (ArrayList<Barang>)ois.readObject();
-                        ois.close();
-
-                        boolean found = false;
-                        li = al2.listIterator();
-                        while(li.hasNext()){
-                            Barang e = (Barang)li.next();
-                            if(e.Status == Status){
-                                System.out.println(e);
-                                found = true;
-                            }
-                        }
-                        if(!found) {
-                            System.out.print("Enter ID_Barang untuk dikembalikan: ");
-                            int ID_Barang = s.nextInt();
-                            while(li.hasNext()){
-                                Barang e = (Barang)li.next();
-                                if(e.ID_Barang == ID_Barang){
-                                    System.out.println(e);
-                                    System.out.println("Enter jumlah barang untuk dikembalikan: ");
-                                    int jumlah = s.nextInt();
-                                    if (jumlah>e.Jumlah) {
-                                        System.out.println("Anda mengisi jumlah pengembalian barang yang tidak valid");
-                                    } else {
-                                        e.Jumlah = e.Jumlah+jumlah;
-                                        e.Status = "Tersedia";
-                                        li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Status));
-                                    }
-                                }
-                            }
-                        }
-                        System.out.println("-------------------------------------");
-                    }else{
-                        System.out.println("Data tidak ditemukan....!");
-                    }
+                    Thread.sleep(1000);
+                    AMhs.clearConsole();
+                    Mengembalikan();
+                    choice = 0;
                     break;
                 case 6:
-                    if(file2.isFile()){
-                        ois = new ObjectInputStream(new FileInputStream(file2));
-                        al2 = (ArrayList<Barang>)ois.readObject();
-                        ois.close();
-
-                        boolean found = false;
-                        li = al2.listIterator();
-                        while(li.hasNext()){
-                            Barang e = (Barang)li.next();
-                            if(e.Status == Status){
-                                System.out.println(e);
-                                found = true;
-                            }
-                        }
-                        if(!found) {
-                            System.out.print("Enter ID_Barang untuk dipinjam: ");
-                            int ID_Barang = s.nextInt();
-                            while(li.hasNext()){
-                                Barang e = (Barang)li.next();
-                                if(e.ID_Barang == ID_Barang){
-                                    System.out.println(e);
-                                    System.out.println("Enter jumlah barang untuk dipinjam: ");
-                                    int jumlah = s.nextInt();
-                                    if (e.Jumlah<jumlah) {
-                                        System.out.println("Anda melewati batas jumlah peminjaman barang");
-                                    } else {
-                                        e.Jumlah = e.Jumlah-jumlah;
-                                        if (e.Jumlah==jumlah) {
-                                            e.Status = "Kosong";
-                                        }
-                                        li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Status));
-                                    }
-                                }
-                            }
-                        }
-                        System.out.println("-------------------------------------");
-                    }else{
-                        System.out.println("Data tidak ditemukan....!");
-                    }
+                    Thread.sleep(1000);
+                    AMhs.clearConsole();
+                    Meminjam();
+                    choice = 0;
                     break;
                 case 7:
-                    AksiMahasiswa AMhs = new AksiMahasiswa();
                     AMhs.HalamanAutentikasi();
                     break;
+                default:
+                    System.out.println("Inputan anda tidak valid!\n");
+                    choice = 1;
             }
         }while(choice!=0);
     }
@@ -279,7 +216,7 @@ class Barang implements Serializable{
                         System.out.println("-------------------------------------");
                         li = al2.listIterator();
                         System.out.println("============DAFTAR BARANG=============");
-                        System.out.println("ID || Nama || Jenis || Jumlah || Kondisi");
+                        System.out.println("ID || Nama || Jenis || Jumlah || Kondisi || Lokasi || Status");
                         while(li.hasNext())
                             System.out.println(li.next());
                         System.out.println("-------------------------------------");
@@ -306,7 +243,14 @@ class Barang implements Serializable{
                         System.out.print("Enter Kondisi Barang : ");
                         String Kondisi = s1.nextLine();
 
-                        al2.add(new Barang(ID_Barang,Nama,Jenis,Jumlah,Kondisi,Status));
+                        s1.nextLine();
+
+                        System.out.println("Enter Lokasi Barang : ");
+                        String Loc = s1.nextLine();
+
+                        Lokasi location = Lokasi.valueOf(Lokasi.class, Loc);
+
+                        al2.add(new Barang(ID_Barang,Nama,Jenis,Jumlah,Kondisi,Lokasi.getVal(location),Status));
                     }
                     oos = new ObjectOutputStream(new FileOutputStream(file2));
                     oos.writeObject(al2);
@@ -370,10 +314,14 @@ class Barang implements Serializable{
                                 System.out.print("Enter Kondisi Barang yang baru : ");
                                 String Kondisi = s1.nextLine();
 
-                                System.out.print("Enter Status Barang yang baru : ");
-                                String Status = s1.nextLine();
+                                s1.nextLine();
 
-                                li.set(new Barang(ID_Barang,Nama,Jenis,Jumlah,Kondisi, Status));
+                                System.out.println("Enter Lokasi Barang yang baru : ");
+                                String Loc = s1.nextLine();
+
+                                Lokasi location = Lokasi.valueOf(Lokasi.class, Loc);
+
+                                li.set(new Barang(ID_Barang,Nama,Jenis,Jumlah,Kondisi, Lokasi.getVal(location), Status));
                                 found = true;
 
                             }
@@ -398,11 +346,111 @@ class Barang implements Serializable{
                     choice = 0;
                     AMhs.HalamanAutentikasi();
                     break;
+                default:
+                    System.out.println("Inputan anda tidak valid!\n");
+                    choice = 1;
             }
         }while(choice!=0);
     }
 
 
+
+    public static void Meminjam() throws IOException, ClassNotFoundException {
+        Scanner s = new Scanner(System.in);
+        Scanner s1 = new Scanner(System.in);
+        File file2 = new File("Barang.txt");
+        ArrayList<Barang> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
+
+
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Barang>)ois.readObject();
+            ois.close();
+
+            li = al2.listIterator();
+            while(li.hasNext()){
+                Barang e = (Barang)li.next();
+                if(e.Status.equals("Tersedia")){
+                    System.out.println(e);
+                }
+            }
+            System.out.print("Enter ID_Barang untuk dipinjam: ");
+            int ID_Barang = s.nextInt();
+            while(li.hasNext()){
+                Barang e = (Barang)li.next();
+                if(e.ID_Barang == ID_Barang){
+                    System.out.println(e);
+                    System.out.println("Enter jumlah barang untuk dipinjam: ");
+                    int jumlah = s.nextInt();
+                    if (e.Jumlah<jumlah) {
+                        System.out.println("Anda melewati batas jumlah peminjaman barang");
+                    } else {
+                        e.Jumlah = e.Jumlah-jumlah;
+                        if (e.Jumlah==jumlah) {
+                            e.Status = "Kosong";
+                        }
+                        li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Loc, e.Status));
+                    }
+                }
+            }
+
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("Data tidak ditemukan....!");
+        }
+    }
+
+
+    public static void Mengembalikan() throws IOException, ClassNotFoundException {
+        Scanner s = new Scanner(System.in);
+        Scanner s1 = new Scanner(System.in);
+        File file2 = new File("Barang.txt");
+        ArrayList<Barang> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
+
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Barang>)ois.readObject();
+            ois.close();
+
+            boolean found = false;
+            li = al2.listIterator();
+            while(li.hasNext()){
+                Barang e = (Barang)li.next();
+                if(e.Status.equals("Tersedia")){
+                    System.out.println(e);
+                    found = true;
+                }
+            }
+            if(!found) {
+                System.out.print("Enter ID_Barang untuk dikembalikan: ");
+                int ID_Barang = s.nextInt();
+                while(li.hasNext()){
+                    Barang e = (Barang)li.next();
+                    if(e.ID_Barang == ID_Barang){
+                        System.out.println(e);
+                        System.out.println("Enter jumlah barang untuk dikembalikan: ");
+                        int jumlah = s.nextInt();
+                        if (jumlah>e.Jumlah) {
+                            System.out.println("Anda mengisi jumlah pengembalian barang yang tidak valid");
+                        } else {
+                            e.Jumlah = e.Jumlah+jumlah;
+                            e.Status = "Tersedia";
+                            li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Loc, e.Status));
+                        }
+                    }
+                }
+            }
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("Data tidak ditemukan....!");
+        }
+    }
 }
 
 
