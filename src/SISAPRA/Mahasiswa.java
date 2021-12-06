@@ -78,7 +78,7 @@ class Mahasiswa extends Pengguna implements Serializable{
 }
 
 
-class AksiMahasiswa implements ITFAutentikasi{
+class AksiMahasiswa  implements ITFAutentikasi{
 
     public AksiMahasiswa() {
     }
@@ -94,7 +94,7 @@ class AksiMahasiswa implements ITFAutentikasi{
     }
 
     public static void BerandaAdmin() throws IOException, ClassNotFoundException, InterruptedException {
-        Barang brg = new Barang();
+        BarangKelola brg = new BarangKelola();
         brg.kelolaBarang();
     }
 
