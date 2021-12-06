@@ -1,4 +1,4 @@
-package Pengguna;
+package SISAPRA;
 
 public class Dosen {
 }

@@ -1,8 +1,8 @@
-package Pengguna;
+package SISAPRA;
 
 import java.io.Serializable;
 
-public class Pengguna implements Serializable {
+public class Pengguna  implements Serializable {
     private String namaDepan;
     private String namaBelakang;
     private String jk;

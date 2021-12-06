@@ -1,7 +1,8 @@
-package Pengguna;
+package SISAPRA;
 
 import java.io.*;
 import java.util.*;
+
 
 class Mahasiswa extends Pengguna implements Serializable{
         private String namaDepan;
@@ -81,36 +82,27 @@ class Mahasiswa extends Pengguna implements Serializable{
 }
 
 
+class AksiMahasiswa {
 
+    public AksiMahasiswa() {
+    }
 
-class MahasiswaDemo {
-
-    public final static void clearConsole() throws IOException, InterruptedException {
+    public void clearConsole() throws IOException, InterruptedException {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public final static void Beranda() {
-        int choice = -1;
-        Scanner s = new Scanner(System.in);
-
-
-
-        System.out.println("\n\n\n\n\n==============SELAMAT DATANG DI HALAMAN BERANDA===========");
-        System.out.println("1. Pinjam Barang");
-        System.out.println("2. Kembalikan Barang");
-        System.out.println("3. Lihat Barang");
-        System.out.println("4. Cek Kondisi Barang");
-        System.out.print("\nMasukkan pilihan Anda : ");
-        choice = s.nextInt();
-
-        switch (choice) {
-            case 1:
-        }
+    public void Beranda() throws IOException, ClassNotFoundException {
+        Barang brg = new Barang();
+        brg.lihatBarang();
     }
 
-    public static void main(String[] args) throws Exception {
+    public void BerandaAdmin() throws IOException, ClassNotFoundException, InterruptedException {
+        Barang brg = new Barang();
+        brg.kelolaBarang();
+    }
 
+    public void HalamanAutentikasi() throws IOException, ClassNotFoundException {
         int choice = -1;
         Scanner s = new Scanner(System.in);
         Scanner s1 = new Scanner(System.in);
@@ -124,7 +116,7 @@ class MahasiswaDemo {
         ListIterator li = null;
         if (file.isFile()) {
             ois = new ObjectInputStream(new FileInputStream(file));
-            al = (ArrayList<Mahasiswa>)ois.readObject();
+            al = (ArrayList<Mahasiswa>) ois.readObject();
             ois.close();
         }
         do {
@@ -184,7 +176,7 @@ class MahasiswaDemo {
                         li = al.listIterator();
 
                         while (li.hasNext()) {
-                            Mahasiswa pk = (Mahasiswa)li.next();
+                            Mahasiswa pk = (Mahasiswa) li.next();
                             pk.setNamaDepan(username);
                             try {
                                 if (pk.getNamaDepan().equals(username) && pk.getNIM().equals(password)) {
@@ -194,12 +186,19 @@ class MahasiswaDemo {
                                     Beranda();
                                     choice = 0;
                                     break;
+                                } else if (username.equals("admin123") && password.equals("admin123")) {
+                                    System.out.println("Login Berhasil");
+                                    Thread.sleep(1000);
+                                    clearConsole();
+                                    BerandaAdmin();
+                                    choice = 0;
+                                    break;
                                 } else {
-                                    int i=li.nextIndex();
-                                    int j=i+1;
-                                    if (i==j);
+                                    int i = li.nextIndex();
+                                    int j = i + 1;
+                                    if (i == j) ;
                                 }
-                            } catch (NullPointerException e) {
+                            } catch (NullPointerException | InterruptedException e) {
                                 System.out.println(pk.getNamaDepan() + " " + pk.getNIM());
                                 System.out.println(e);
                             }
@@ -231,10 +230,11 @@ class MahasiswaDemo {
                 default:
                     throw new IllegalStateException("Unexpected value: " + choice);
             }
-            } while (choice != 0);
-
-        }
+        } while (choice != 0);
     }
+}
+
+
 
 
 

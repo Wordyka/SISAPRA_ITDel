@@ -1,4 +1,4 @@
-package Pengguna;
+package SISAPRA;
 
 public class Staf extends Pengguna {
     private String ID_Staf;

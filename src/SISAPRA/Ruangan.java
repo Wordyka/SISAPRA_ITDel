@@ -1,4 +1,4 @@
-package Pengguna;
+package SISAPRA;
 
 public class Ruangan {
     private String ID_Ruangan;

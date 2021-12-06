@@ -1,7 +1,4 @@
-package Pengguna;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package SISAPRA;
 
 public interface ITFAutentikasi {
     public void Login();
