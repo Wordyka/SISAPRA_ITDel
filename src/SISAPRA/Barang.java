@@ -78,7 +78,7 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
                     lihatDaftarBarang();
                     break;
                 case 2:
-                    cariBarang();
+                    lihatJenis();
                     break;
                 case 3:
                     cekKondisi();
@@ -96,10 +96,7 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
                     cariBarang();
                     break;
                 case 8:
-                    //Thread.sleep(1000);
-                    //AMhs.clearConsole();
                     Mengembalikan();
-                    //choice = 0;
                     break;
                 case 9:
                     Meminjam();

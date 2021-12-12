@@ -41,7 +41,9 @@ public class BarangKelola extends ABSPengelola implements Serializable {
         ObjectInputStream ois = null;
         ListIterator li = null;
         AksiMahasiswa AMhs = new AksiMahasiswa();
-        Mahasiswa Mhs = new Mahasiswa();
+        AksiDosen ADsn = new AksiDosen();
+        AksiStaf AStf = new AksiStaf();
+
         if(file2.isFile()){
             ois = new ObjectInputStream(new FileInputStream(file2));
             al2 = (ArrayList<BarangKelola>)ois.readObject();
@@ -55,7 +57,9 @@ public class BarangKelola extends ABSPengelola implements Serializable {
             System.out.println("3.Hapus Data Barang");
             System.out.println("4.Ubah Data Barang");
             System.out.println("5.Daftar Mahasiswa");
-            System.out.println("6.Kembali");
+            System.out.println("6.Daftar Dosen");
+            System.out.println("7.Daftar Staf");
+            System.out.println("8.Kembali");
             System.out.println("0.Keluar");
             System.out.print("Masukkan pilihan Anda : ");
             choice = s.nextInt();
@@ -91,6 +95,12 @@ public class BarangKelola extends ABSPengelola implements Serializable {
                     AMhs.daftarMahasiswa();
                     break;
                 case 6:
+                    ADsn.daftarDosen();
+                    break;
+                case 7:
+                    AStf.daftarStaf();
+                    break;
+                case 8:
                     Thread.sleep(1000);
                     AMhs.clearConsole();
                     choice = 0;

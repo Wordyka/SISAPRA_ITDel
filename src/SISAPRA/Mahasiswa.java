@@ -76,18 +76,10 @@ class Mahasiswa extends Pengguna implements Serializable{
             this.Angkatan = angkatan;
         }
 
-//    @Override
-//    public String toString() {
-//            if (namaDepan.equals(null)) {
-//                Pengguna p = new Pengguna();
-//                p.toString();
-//            }
-//            return namaDepan+" || "+ namaBelakang+" || "+jk + " || "+ NIM +" || "+ prod +" || " +Angkatan;
-//    }
 }
 
 
-class AksiMahasiswa  implements ITFAutentikasi{
+class AksiMahasiswa implements ITFAutentikasi{
 
     public AksiMahasiswa() {
     }
@@ -111,7 +103,7 @@ class AksiMahasiswa  implements ITFAutentikasi{
         int choice = -1;
         Scanner s = new Scanner(System.in);
         Scanner s1 = new Scanner(System.in);
-        File file = new File("Autentikasi.txt");
+        File file = new File("AutentikasiMahasiswa.txt");
         ArrayList<Mahasiswa> al = new ArrayList<>();
         Pengguna p = new Pengguna();
         Mahasiswa mhs = new Mahasiswa();
@@ -143,26 +135,6 @@ class AksiMahasiswa  implements ITFAutentikasi{
                     Login(choice);
                     choice = 0;
                     break;
-//                case 3:
-//
-//                    if(file.isFile()){
-//                        ois = new ObjectInputStream(new FileInputStream(file));
-//                        al = (ArrayList<Mahasiswa>)ois.readObject();
-//                        ois.close();
-//
-//                        System.out.println("-------------------------------------");
-//                        li = al.listIterator();
-//                        while(li.hasNext())
-//                            System.out.println(li.next());
-//                        System.out.println("-------------------------------------");
-//                    }else{
-//                        System.out.println("File not Exists....!");
-//                    }
-//                    break;
-//                case 4:
-//
-//                    //break;
-//                    break;
                 default:
                     System.out.println("Inputan anda tidak valid!\n");
                     choice = 1;
@@ -234,7 +206,7 @@ class AksiMahasiswa  implements ITFAutentikasi{
     public static void Register() throws IOException {
         Scanner s = new Scanner(System.in);
         Scanner s1 = new Scanner(System.in);
-        File file = new File("Autentikasi.txt");
+        File file = new File("AutentikasiMahasiswa.txt");
         ArrayList<Mahasiswa> al = new ArrayList<>();
         Pengguna p = new Pengguna();
         Mahasiswa mhs = new Mahasiswa();
