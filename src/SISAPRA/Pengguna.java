@@ -49,6 +49,7 @@ public class Pengguna implements Serializable {
 
     @Override
     public String toString() {
-        return  namaDepan + " || " + namaBelakang + " || " + jk + " || ";
+        Mahasiswa m = new Mahasiswa();
+        return  namaDepan + " || " + namaBelakang + " || " + jk;
     }
 }

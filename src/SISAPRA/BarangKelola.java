@@ -54,7 +54,8 @@ public class BarangKelola extends ABSPengelola implements Serializable {
             System.out.println("2.Tambah Data Barang");
             System.out.println("3.Hapus Data Barang");
             System.out.println("4.Ubah Data Barang");
-            System.out.println("5.Kembali");
+            System.out.println("5.Daftar Mahasiswa");
+            System.out.println("6.Kembali");
             System.out.println("0.Keluar");
             System.out.print("Masukkan pilihan Anda : ");
             choice = s.nextInt();
@@ -87,6 +88,9 @@ public class BarangKelola extends ABSPengelola implements Serializable {
                     ubahBarang();
                     break;
                 case 5:
+                    AMhs.daftarMahasiswa();
+                    break;
+                case 6:
                     Thread.sleep(1000);
                     AMhs.clearConsole();
                     choice = 0;

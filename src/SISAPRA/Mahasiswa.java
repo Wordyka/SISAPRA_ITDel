@@ -75,6 +75,15 @@ class Mahasiswa extends Pengguna implements Serializable{
             this.prod = prod;
             this.Angkatan = angkatan;
         }
+
+//    @Override
+//    public String toString() {
+//            if (namaDepan.equals(null)) {
+//                Pengguna p = new Pengguna();
+//                p.toString();
+//            }
+//            return namaDepan+" || "+ namaBelakang+" || "+jk + " || "+ NIM +" || "+ prod +" || " +Angkatan;
+//    }
 }
 
 
@@ -240,7 +249,7 @@ class AksiMahasiswa  implements ITFAutentikasi{
         System.out.print("Enter Nama Belakang : ");
         String NamaB = s1.nextLine();
 
-        System.out.print("Enter Jenis Kelamin : ");
+        System.out.print("Enter Jenis Kelamin (L/P) : ");
         String jk = s1.nextLine();
 
         Jenis_Kelamin jkl = Jenis_Kelamin.valueOf(Jenis_Kelamin.class,jk);
@@ -268,6 +277,32 @@ class AksiMahasiswa  implements ITFAutentikasi{
         oos = new ObjectOutputStream(new FileOutputStream(file));
         oos.writeObject(al);
         oos.close();
+    }
+
+    public static void daftarMahasiswa() throws IOException, ClassNotFoundException {
+        Scanner s = new Scanner(System.in);
+        Scanner s1 = new Scanner(System.in);
+        File file2 = new File("Autentikasi.txt");
+        ArrayList<Mahasiswa> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
+
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Mahasiswa>)ois.readObject();
+            ois.close();
+
+            System.out.println("-------------------------------------");
+            li = al2.listIterator();
+            System.out.println("============DAFTAR PENGGGUNA MAHASISWA============");
+            System.out.println("Nama Depan || Nama Belakang || Jenis Kelamin");
+            while(li.hasNext())
+                System.out.println(li.next());
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("File not Exists....!");
+        }
     }
 }
 

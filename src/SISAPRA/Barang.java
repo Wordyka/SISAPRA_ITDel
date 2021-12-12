@@ -59,12 +59,16 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
 
         do{
             System.out.println("\n\n\n\n==============SELAMAT DATANG DI HALAMAN BERANDA===========");
-            System.out.println("1.Tampilkan Data Barang");
-            System.out.println("2.Cari Data Barang");
-            System.out.println("3.Urutkan berdasarkan Nama");
-            System.out.println("4.Pengembalian Barang");
-            System.out.println("5.Peminjaman Barang");
-            System.out.println("6.Kembali");
+            System.out.println("1.Lihat Data Barang");
+            System.out.println("2.Lihat Jenis Barang");
+            System.out.println("3.Cek Kondisi Barang");
+            System.out.println("4.Saring Data Barang");
+            System.out.println("5.Urutkan Barang");
+            System.out.println("6.Lihat Daftar Ruangan");
+            System.out.println("7.Cari Barang");
+            System.out.println("8.Pengembalian Barang");
+            System.out.println("9.Peminjaman Barang");
+            System.out.println("10.Kembali");
             System.out.println("0.Keluar");
             System.out.print("Masukkan pilihan Anda : ");
             choice = s.nextInt();
@@ -77,21 +81,30 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
                     cariBarang();
                     break;
                 case 3:
-                    urutData();
+                    cekKondisi();
                     break;
                 case 4:
-                    Thread.sleep(1000);
-                    AMhs.clearConsole();
-                    Mengembalikan();
-                    choice = 0;
+                    saringData();
                     break;
                 case 5:
-                    Thread.sleep(1000);
-                    AMhs.clearConsole();
-                    Meminjam();
-                    choice = 0;
+                    urutData();
                     break;
                 case 6:
+                    lihatDaftarRuangan();
+                    break;
+                case 7:
+                    cariBarang();
+                    break;
+                case 8:
+                    //Thread.sleep(1000);
+                    //AMhs.clearConsole();
+                    Mengembalikan();
+                    //choice = 0;
+                    break;
+                case 9:
+                    Meminjam();
+                    break;
+                case 10:
                     AMhs.HalamanAutentikasi();
                     break;
                 default:
@@ -130,17 +143,88 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
 
     @Override
     public void lihatJenis() throws IOException, ClassNotFoundException {
+        File file2 = new File("Barang.txt");
+        ArrayList<Barang> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
 
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Barang>)ois.readObject();
+            ois.close();
+
+            boolean found = false;
+
+            System.out.println("-------------------------------------");
+            li = al2.listIterator();
+            while(li.hasNext()) {
+                Barang e = (Barang)li.next();
+                System.out.println(e.Nama+" => "+ e.Jenis);
+                found = true;
+            }
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("Data tidak ditemukan....!");
+        }
     }
 
     @Override
     public void cekKondisi() throws IOException, ClassNotFoundException {
+        File file2 = new File("Barang.txt");
+        ArrayList<Barang> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
 
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Barang>)ois.readObject();
+            ois.close();
+
+            boolean found = false;
+
+            System.out.println("-------------------------------------");
+            li = al2.listIterator();
+            while(li.hasNext()) {
+                Barang e = (Barang)li.next();
+                System.out.println(e.Nama+" => "+ e.Kondisi);
+                found = true;
+            }
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("Data tidak ditemukan....!");
+        }
     }
 
     @Override
     public void saringData() throws IOException, ClassNotFoundException {
+        Scanner s = new Scanner(System.in);
+        Scanner s1 = new Scanner(System.in);
+        File file2 = new File("Barang.txt");
+        ArrayList<Barang> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
 
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Barang>)ois.readObject();
+            ois.close();
+
+            boolean found = false;
+
+            System.out.println("-------------------------------------");
+            li = al2.listIterator();
+            while(li.hasNext()) {
+                Barang e = (Barang)li.next();
+                System.out.println(e.Nama+" => "+ e.Kondisi);
+                found = true;
+            }
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("Data tidak ditemukan....!");
+        }
     }
 
     @Override
@@ -176,8 +260,32 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
 
     @Override
     public void lihatDaftarRuangan() throws IOException, ClassNotFoundException {
+        File file2 = new File("Barang.txt");
+        ArrayList<Barang> al2 = new ArrayList<>();
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        ListIterator li = null;
 
+        if(file2.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(file2));
+            al2 = (ArrayList<Barang>)ois.readObject();
+            ois.close();
+
+            boolean found = false;
+
+            System.out.println("-------------------------------------");
+            li = al2.listIterator();
+            while(li.hasNext()) {
+                Barang e = (Barang)li.next();
+                System.out.println(e.Nama+" => "+ e.Loc);
+                found = true;
+            }
+            System.out.println("-------------------------------------");
+        }else{
+            System.out.println("Data tidak ditemukan....!");
+        }
     }
+
 
 
     @Override
@@ -225,6 +333,8 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
         ObjectInputStream ois = null;
         ListIterator li = null;
 
+        boolean found = false;
+
 
         if(file2.isFile()){
             ois = new ObjectInputStream(new FileInputStream(file2));
@@ -238,12 +348,15 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
                     System.out.println(e);
                 }
             }
+
             System.out.print("Enter ID_Barang untuk dipinjam: ");
             int ID_Barang = s.nextInt();
+
+
+            li = al2.listIterator();
             while(li.hasNext()){
                 Barang e = (Barang)li.next();
-                if(e.ID_Barang == ID_Barang){
-                    System.out.println(e);
+                if(ID_Barang==e.ID_Barang){
                     System.out.println("Enter jumlah barang untuk dipinjam: ");
                     int jumlah = s.nextInt();
                     if (e.Jumlah<jumlah) {
@@ -254,8 +367,16 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
                             e.Status = "Kosong";
                         }
                         li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Loc, e.Status));
+                        found = true;
                     }
                 }
+            }
+
+            if (found) {
+                oos = new ObjectOutputStream(new FileOutputStream(file2));
+                oos.writeObject(al2);
+                oos.close();
+                System.out.println("Barang berhasil dipinjam!");
             }
 
             System.out.println("-------------------------------------");
@@ -274,39 +395,49 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
         ObjectInputStream ois = null;
         ListIterator li = null;
 
+        boolean found = false;
+
         if(file2.isFile()){
             ois = new ObjectInputStream(new FileInputStream(file2));
             al2 = (ArrayList<Barang>)ois.readObject();
             ois.close();
 
-            boolean found = false;
             li = al2.listIterator();
             while(li.hasNext()){
                 Barang e = (Barang)li.next();
-                if(e.Status.equals("Tersedia")){
-                    System.out.println(e);
-                    found = true;
-                }
+                System.out.println(e);
             }
-            if(!found) {
-                System.out.print("Enter ID_Barang untuk dikembalikan: ");
-                int ID_Barang = s.nextInt();
-                while(li.hasNext()){
-                    Barang e = (Barang)li.next();
-                    if(e.ID_Barang == ID_Barang){
-                        System.out.println(e);
-                        System.out.println("Enter jumlah barang untuk dikembalikan: ");
-                        int jumlah = s.nextInt();
-                        if (jumlah>e.Jumlah) {
-                            System.out.println("Anda mengisi jumlah pengembalian barang yang tidak valid");
-                        } else {
-                            e.Jumlah = e.Jumlah+jumlah;
-                            e.Status = "Tersedia";
-                            li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Loc, e.Status));
-                        }
+
+            System.out.print("Enter ID_Barang untuk dikembalikan: ");
+            int ID_Barang = s.nextInt();
+
+            li = al2.listIterator();
+
+            while(li.hasNext()){
+                Barang e = (Barang)li.next();
+                if(e.ID_Barang == ID_Barang){
+                    System.out.println(e);
+                    System.out.println("Enter jumlah barang untuk dikembalikan: ");
+                    s.nextLine();
+                    int jumlah = s.nextInt();
+                    if (jumlah>e.Jumlah) {
+                        System.out.println("Anda mengisi jumlah pengembalian barang yang tidak valid");
+                    } else {
+                        e.Jumlah = e.Jumlah+jumlah;
+                        e.Status = "Tersedia";
+                        li.set(new Barang(e.ID_Barang,e.Nama,e.Jenis,e.Jumlah,e.Kondisi, e.Loc, e.Status));
+                        found = true;
                     }
                 }
             }
+
+            if (found) {
+                oos = new ObjectOutputStream(new FileOutputStream(file2));
+                oos.writeObject(al2);
+                oos.close();
+                System.out.println("Barang berhasil dikembalikan!");
+            }
+
             System.out.println("-------------------------------------");
         }else{
             System.out.println("Data tidak ditemukan....!");
