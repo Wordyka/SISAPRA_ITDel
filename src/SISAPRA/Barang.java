@@ -104,6 +104,9 @@ class Barang extends ABSPengguna implements ITFPinjamKembali, Serializable{
                 case 10:
                     AMhs.HalamanAutentikasi();
                     break;
+                case 0:
+                    System.exit(0);
+                    break;
                 default:
                     System.out.println("Inputan anda tidak valid!\n");
                     choice = 1;

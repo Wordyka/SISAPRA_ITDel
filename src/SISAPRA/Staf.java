@@ -82,6 +82,8 @@ class AksiStaf implements ITFAutentikasi {
                     Login(choice);
                     choice = 0;
                     break;
+                case 0:
+                    System.exit(0);
                 default:
                     System.out.println("Inputan anda tidak valid!\n");
                     choice = 1;

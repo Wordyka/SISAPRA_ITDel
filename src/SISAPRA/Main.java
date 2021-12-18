@@ -16,12 +16,12 @@ public class Main {
 
         switch (choice) {
             case 1:
-                AksiDosen ADsn = new AksiDosen();
-                ADsn.HalamanAutentikasi();
-                break;
-            case 2:
                 AksiStaf AStf = new AksiStaf();
                 AStf.HalamanAutentikasi();
+                break;
+            case 2:
+                AksiDosen ADsn = new AksiDosen();
+                ADsn.HalamanAutentikasi();
                 break;
             case 3:
                 AksiMahasiswa AMhs = new AksiMahasiswa();
